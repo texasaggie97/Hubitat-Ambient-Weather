@@ -8,7 +8,7 @@ metadata {
         capability "Sensor"
         capability "Actuator"
 
-        //Current Conditions
+        // Current Conditions
         attribute "weather", "string"
         attribute "weatherIcon", "string"
         attribute "dewPoint", "number"
@@ -16,25 +16,51 @@ metadata {
         attribute "feelsLike", "number"
         attribute "pressure", "string"
 
-        //Precipitation
+        // Precipitation
         attribute "precip_today", "number"
         attribute "precip_1hr", "number"
 
 
-        //Wind
+        // Wind
         attribute "wind", "number"
         attribute "wind_gust", "number"
         attribute "wind_degree", "number"
         attribute "wind_dir", "string"
         attribute "wind_direction", "string"
 
-        //Light
+        // Light
         attribute "solarradiation", "number"
         attribute "uv", "number"
 
-        //Indoor
+        // Indoor
         attribute "indoortemperature", "number"
         attribute "indoorhumidity", "number"
+
+        // Extra temp/himidity
+        attribute "temperature1", "number"
+        attribute "humidity1", "number"
+
+        attribute "temperature2", "number"
+        attribute "humidity2", "number"
+
+        attribute "temperature3", "number"
+        attribute "humidity3", "number"
+
+        attribute "temperature4", "number"
+        attribute "humidity4", "number"
+
+        attribute "temperature5", "number"
+        attribute "humidity5", "number"
+
+        attribute "temperature6", "number"
+        attribute "humidity6", "number"
+
+        attribute "temperature7", "number"
+        attribute "humidity7", "number"
+
+        attribute "temperature8", "number"
+        attribute "humidity8", "number"
+
     }
     preferences {
         section("Preferences") {
@@ -50,16 +76,16 @@ def refresh() {
 def setWeather(weather) {
     logger("debug", "Weather: " + weather)
 
-    //Set temperature
+    // Set temperature
     sendEvent(name: "temperature", value: weather.tempf, unit: '°F', isStateChange: true)
 
-    //Set Humidity
+    // Set Humidity
     sendEvent(name: "humidity", value: weather.humidity, unit: '%', isStateChange: true)
 
-    //Set DewPoint
+    // Set DewPoint
     sendEvent(name: "dewPoint", value: weather.dewPoint, unit:'°F', isStateChange: true)
 
-    //Set Comfort Level
+    // Set Comfort Level
     float temp = 0.0
 
     temp = (weather.dewPoint - 35)
@@ -73,17 +99,17 @@ def setWeather(weather) {
     temp = temp.round(1)
     sendEvent(name: "comfort", value: temp, isStateChange: true)
 
-    //Set Barometric Pressure
+    // Set Barometric Pressure
     sendEvent(name: "pressure", value: weather.baromrelin, unit: 'in', isStateChange: true)
 
-    //Set Feels Like Temperature
+    // Set Feels Like Temperature
     sendEvent(name: "feelsLike", value: weather.feelsLike, unit: '°F', isStateChange: true)
 
-    //Rain
+    // Rain
     sendEvent(name: "precip_today", value: weather.dailyrainin, unit: 'in', isStateChange: true)
     sendEvent(name: "precip_1hr", value: weather.hourlyrainin, unit: 'in', isStateChange: true)
 
-    //Wind
+    // Wind
     sendEvent(name: "wind", value: weather.windspeedmph, unit: 'mph', isStateChange: true)
     sendEvent(name: "wind_gust", value: weather.windgustmph, unit: 'mph', isStateChange: true)
     sendEvent(name: "wind_degree", value: weather.winddir, unit: '°', isStateChange: true)
@@ -118,15 +144,15 @@ def setWeather(weather) {
         sendEvent(name:  "wind_dir", value: "N", isStateChange: true)
     }
 
-    //UV and Light
+    // UV and Light
     sendEvent(name: "solarradiation", value: weather.solarradiation, isStateChange: true)
     sendEvent(name: "illuminance", value: weather.solarradiation, isStateChange: true)
     sendEvent(name: "uv", value: weather.uv, isStateChange: true)
 
-    //Indoor Temp
+    // Indoor Temp
     sendEvent(name: "indoortemperature", value: weather.tempinf, unit: '°F', isStateChange: true)
     
-    //Indoor Humidity
+    // Indoor Humidity
     sendEvent(name: "indoorhumidity", value: weather.humidityin, unit: '%', isStateChange: true)
 
     if (weather.containsKey('temp1f')) {
@@ -137,44 +163,44 @@ def setWeather(weather) {
 
     if (weather.containsKey('temp2f')) {
         // We will assume all the item 2 keys exist
-        sendEvent(name: "temperature2", value: weather.temp1f, unit: '°F', isStateChange: true)
-        sendEvent(name: "humidity2", value: weather.humidity1, unit: '%', isStateChange: true)
+        sendEvent(name: "temperature2", value: weather.temp2f, unit: '°F', isStateChange: true)
+        sendEvent(name: "humidity2", value: weather.humidity2, unit: '%', isStateChange: true)
     }
 
     if (weather.containsKey('temp3f')) {
         // We will assume all the item 3 keys exist
-        sendEvent(name: "temperature3", value: weather.temp1f, unit: '°F', isStateChange: true)
-        sendEvent(name: "humidity3", value: weather.humidity1, unit: '%', isStateChange: true)
+        sendEvent(name: "temperature3", value: weather.temp3f, unit: '°F', isStateChange: true)
+        sendEvent(name: "humidity3", value: weather.humidity3, unit: '%', isStateChange: true)
     }
 
     if (weather.containsKey('temp4f')) {
         // We will assume all the item 4 keys exist
-        sendEvent(name: "temperature4", value: weather.temp1f, unit: '°F', isStateChange: true)
-        sendEvent(name: "humidity4", value: weather.humidity1, unit: '%', isStateChange: true)
+        sendEvent(name: "temperature4", value: weather.temp4f, unit: '°F', isStateChange: true)
+        sendEvent(name: "humidity4", value: weather.humidity4, unit: '%', isStateChange: true)
     }
 
     if (weather.containsKey('temp5f')) {
         // We will assume all the item 5 keys exist
-        sendEvent(name: "temperature5", value: weather.temp1f, unit: '°F', isStateChange: true)
-        sendEvent(name: "humidity5", value: weather.humidity1, unit: '%', isStateChange: true)
+        sendEvent(name: "temperature5", value: weather.temp5f, unit: '°F', isStateChange: true)
+        sendEvent(name: "humidity5", value: weather.humidity5, unit: '%', isStateChange: true)
     }
 
     if (weather.containsKey('temp6f')) {
         // We will assume all the item 6 keys exist
-        sendEvent(name: "temperature6", value: weather.temp1f, unit: '°F', isStateChange: true)
-        sendEvent(name: "humidity6", value: weather.humidity1, unit: '%', isStateChange: true)
+        sendEvent(name: "temperature6", value: weather.temp6f, unit: '°F', isStateChange: true)
+        sendEvent(name: "humidity6", value: weather.humidity6, unit: '%', isStateChange: true)
     }
 
     if (weather.containsKey('temp7f')) {
         // We will assume all the item 7 keys exist
-        sendEvent(name: "temperature7", value: weather.temp1f, unit: '°F', isStateChange: true)
-        sendEvent(name: "humidity7", value: weather.humidity1, unit: '%', isStateChange: true)
+        sendEvent(name: "temperature7", value: weather.temp7f, unit: '°F', isStateChange: true)
+        sendEvent(name: "humidity7", value: weather.humidity7, unit: '%', isStateChange: true)
     }
 
     if (weather.containsKey('temp8f')) {
         // We will assume all the item 8 keys exist
-        sendEvent(name: "temperature8", value: weather.temp1f, unit: '°F', isStateChange: true)
-        sendEvent(name: "humidity8", value: weather.humidity1, unit: '%', isStateChange: true)
+        sendEvent(name: "temperature8", value: weather.temp8f, unit: '°F', isStateChange: true)
+        sendEvent(name: "humidity8", value: weather.humidity8, unit: '%', isStateChange: true)
     }
 }
 

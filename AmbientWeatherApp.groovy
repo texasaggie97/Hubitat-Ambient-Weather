@@ -20,7 +20,7 @@ def page2() {
 
         stations.each { stationMacs << it.macAddress }
     } catch (groovyx.net.http.HttpResponseException e) {
-        //then unauthorized
+        // then unauthorized
         return dynamicPage(name: "page2", title: "Error", nextPage: "page1", uninstall: true) {
             section {
                 paragraph("There was an error authorizing you. Please try again.")
@@ -51,7 +51,7 @@ def page3() {
     }
 }
 
-//lifecycle functions
+// lifecycle functions
 def installed() {
     log.debug("Installed")
 
@@ -78,7 +78,7 @@ def updated() {
 def initialize() {
     fetchNewWeather()
 
-    //chron schedule, refreshInterval is int
+    // chron schedule, refreshInterval is int
     def m = refreshInterval
     def h = Math.floor(m / 60)
     m -= h * 60
@@ -91,7 +91,7 @@ def initialize() {
     schedule("0 $m $h * * ? *", fetchNewWeather)
 }
 
-//children
+// children
 def addDevice() {
     addChildDevice("CordMaster", "Ambient Weather Device", "AWTILE-$station", null, [completedSetup: true])
 }
@@ -100,7 +100,7 @@ def delDevice() {
     deleteChildDevice("AWTILE-$station")
 }
 
-//fetch functions
+// fetch functions
 def getStations() throws groovyx.net.http.HttpResponseException {
     def data = []
 
@@ -139,7 +139,7 @@ def requestData(path, query, code) {
     }
 }
 
-//loop
+// loop
 def fetchNewWeather() {
 
     def weather = getWeather()
