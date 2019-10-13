@@ -62,6 +62,10 @@ def installed() {
     runEvery5Minutes(fetchNewWeather);
 }
 
+def uninstalled() {
+    delDevice()
+}
+
 def updated() {
     log.debug("Updated");
 
@@ -89,8 +93,11 @@ def initialize() {
 
 //children
 def addDevice() {
-
     addChildDevice("CordMaster", "Ambient Weather Device", "AWTILE-$station", null, [completedSetup: true]);
+}
+
+def delDevice() {
+    deleteChildDevice("AWTILE-$station")
 }
 
 //fetch functions
