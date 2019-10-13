@@ -128,6 +128,54 @@ def setWeather(weather) {
     
     //Indoor Humidity
     sendEvent(name: "indoorhumidity", value: weather.humidityin, unit: '%', isStateChange: true)
+
+    if (weather.containsKey('temp1f')) {
+        // We will assume all the item 1 keys exist
+        sendEvent(name: "temperature1", value: weather.temp1f, unit: '°F', isStateChange: true);
+        sendEvent(name: "humidity1", value: weather.humidity1, unit: '%', isStateChange: true)
+    }
+
+    if (weather.containsKey('temp2f')) {
+        // We will assume all the item 2 keys exist
+        sendEvent(name: "temperature2", value: weather.temp1f, unit: '°F', isStateChange: true);
+        sendEvent(name: "humidity2", value: weather.humidity1, unit: '%', isStateChange: true)
+    }
+
+    if (weather.containsKey('temp3f')) {
+        // We will assume all the item 3 keys exist
+        sendEvent(name: "temperature3", value: weather.temp1f, unit: '°F', isStateChange: true);
+        sendEvent(name: "humidity3", value: weather.humidity1, unit: '%', isStateChange: true)
+    }
+
+    if (weather.containsKey('temp4f')) {
+        // We will assume all the item 4 keys exist
+        sendEvent(name: "temperature4", value: weather.temp1f, unit: '°F', isStateChange: true);
+        sendEvent(name: "humidity4", value: weather.humidity1, unit: '%', isStateChange: true)
+    }
+
+    if (weather.containsKey('temp5f')) {
+        // We will assume all the item 5 keys exist
+        sendEvent(name: "temperature5", value: weather.temp1f, unit: '°F', isStateChange: true);
+        sendEvent(name: "humidity5", value: weather.humidity1, unit: '%', isStateChange: true)
+    }
+
+    if (weather.containsKey('temp6f')) {
+        // We will assume all the item 6 keys exist
+        sendEvent(name: "temperature6", value: weather.temp1f, unit: '°F', isStateChange: true);
+        sendEvent(name: "humidity6", value: weather.humidity1, unit: '%', isStateChange: true)
+    }
+
+    if (weather.containsKey('temp7f')) {
+        // We will assume all the item 7 keys exist
+        sendEvent(name: "temperature7", value: weather.temp1f, unit: '°F', isStateChange: true);
+        sendEvent(name: "humidity7", value: weather.humidity1, unit: '%', isStateChange: true)
+    }
+
+    if (weather.containsKey('temp8f')) {
+        // We will assume all the item 8 keys exist
+        sendEvent(name: "temperature8", value: weather.temp1f, unit: '°F', isStateChange: true);
+        sendEvent(name: "humidity8", value: weather.humidity1, unit: '%', isStateChange: true)
+    }
 }
 
 private logger(type, msg){
