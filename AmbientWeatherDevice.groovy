@@ -31,6 +31,10 @@ metadata {
         //Light
         attribute "solarradiation", "number"
         attribute "uv", "number"
+
+        //Indoor
+        attribute "indoortemperature", "number"
+        attribute "indoorhumidity", "number"
     }
     preferences {
         section("Preferences") {
@@ -118,6 +122,12 @@ def setWeather(weather) {
     sendEvent(name: "solarradiation", value: weather.solarradiation, isStateChange: true);
     sendEvent(name: "illuminance", value: weather.solarradiation, isStateChange: true);
     sendEvent(name: "uv", value: weather.uv, isStateChange: true);
+
+    //Indoor Temp
+    sendEvent(name: "indoortemperature", value: weather.tempinf, unit: '°F', isStateChange: true);
+    
+    //Indoor Humidity
+    sendEvent(name: "indoorhumidity", value: weather.humidityin, unit: '%', isStateChange: true)
 }
 
 private logger(type, msg){
